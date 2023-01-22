@@ -1,0 +1,29 @@
+---
+- hosts: k3s
+  vars_files:
+  - environment_vars.yaml
+  vars:
+  tasks:
+  - name: Shut down
+    shell:
+      cmd: shutdown
+    become: true
+    tags: ['never','shutdown']
+  roles:
+  - { role: common,
+      tags: ['never','update','setup'] }
+- hosts: controlpi
+  environment:
+  - KUBECONFIG: /home/pi/.kube/config
+  vars_files:
+  - environment_vars.yaml
+  tasks:
+  - name: Install controlpi packages
+    apt:
+      pkg:
+      - mosquitto-clients
+    become: true
+    tags: ['never','cpinstall']
+  roles:
+  - { role: mqtt,
+      tags: ['never','mqtt'] }
