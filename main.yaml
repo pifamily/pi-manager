@@ -12,6 +12,8 @@
   roles:
   - { role: common,
       tags: ['never','update','setup'] }
+  - { role: storage_management,
+      tags: ['never','storage_management'] }
 - hosts: controlpi
   environment:
   - KUBECONFIG: /home/pi/.kube/config
@@ -27,3 +29,13 @@
   roles:
   - { role: mqtt,
       tags: ['never','mqtt'] }
+  - { role: influx,
+      tags: ['never','influx'] }
+  - { role: telegraf,
+      tags: ['never','telegraf'] }
+  - { role: portainer,
+      tags: ['never','portainer'] }
+  - { role: jupyter,
+      tags: ['never','jupyter'] }
+  - { role: craftbeerpi,
+      tags: ['never','craftbeerpi'] }
