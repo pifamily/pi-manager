@@ -11,7 +11,9 @@
     tags: ['never','shutdown']
   roles:
   - { role: common,
-      tags: ['never','update','setup'] }
+      tags: ['never','update','setup','dns'] }
+  - { role: k3s_common,
+      tags: ['never','k3s_setup'] }
   - { role: storage_management,
       tags: ['never','storage_management'] }
 - hosts: controlpi
@@ -27,6 +29,8 @@
     become: true
     tags: ['never','cpinstall']
   roles:
+  - { role: registry,
+      tags: ['never','registry'] }
   - { role: mqtt,
       tags: ['never','mqtt'] }
   - { role: influx,
@@ -39,3 +43,18 @@
       tags: ['never','jupyter'] }
   - { role: craftbeerpi,
       tags: ['never','craftbeerpi'] }
+  - { role: octopi,
+      tags: ['never','octopi'] }
+  - { role: codepi,
+      tags: ['never','codepi'] }
+- hosts: netpi
+  roles:
+    - { role: common,
+      tags: ['never','update','setup'] }
+    - { role: docker,
+      tags: ['never','docker'] }
+    - { role: 'pihole',
+      tags: ['never','pihole'] }
+    - { role: 'lcdpi',
+      tags: ['never','lcd'] }
+
